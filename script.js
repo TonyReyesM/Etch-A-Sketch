@@ -16,6 +16,7 @@ function createGrid(size = 16) {
         container.append(row)
     }
     body.append(container);
+    hoverEventCreator();
 };
 
 function changeColor(){
@@ -31,11 +32,14 @@ function resetGame(){
 }
 
 function eraseTiles(){
+    const tiles = document.querySelectorAll('.tile')
     tiles.forEach(tile => tile.classList.remove('hovering'))
 }
 
-const tiles = document.querySelectorAll('.tile')
-tiles.forEach(tile => tile.addEventListener('mouseover', changeColor))
+function hoverEventCreator(){
+    const tiles = document.querySelectorAll('.tile')
+    tiles.forEach(tile => tile.addEventListener('mouseover', changeColor))
+}
 
 const resetButton = document.querySelector('.reset')
 resetButton.addEventListener('click', resetGame)
