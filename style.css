@@ -1,0 +1,53 @@
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0px;
+    background-color: rgba(0, 21, 41, 0.795);
+}
+
+.title {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: whitesmoke;
+    margin: 0px;
+}
+
+.reset {
+    margin-bottom: 3px;
+}
+
+.container {
+    display: flex;
+    flex: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    object-fit: contain;
+    max-height: 100vh;
+    max-width: 100%;
+    border-style: solid;
+    border-color: black;
+    border-width: 5px;
+    height: 560px;
+    width: auto;
+}
+
+.row {
+    display: flex;
+    height: 35px;
+}
+
+.tile {
+    background-color: whitesmoke;
+    width: 35px;
+    height: auto;
+    border-style: dotted;
+    border-width: 1px;
+    border-color: black;
+}
+
+.hovering {
+    background-color: black;
+}
+
