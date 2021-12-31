@@ -1,10 +1,14 @@
 const body = document.body
+const game = document.querySelector('.game')
 
 body.onload = createGrid();
 
+//GRID FUNCTIONALITY----------------------------------------------------------------------------------
+
 function createGrid(size = 16) {
-    const container = document.createElement('div')
-    container.classList.add('container')
+    if(size<1 || size>100) size = 16
+    const grid = document.createElement('div')
+    grid.classList.add('grid')
     for(let i=0; i<size; i++){
         let row = document.createElement('div')
         row.classList.add('row')
@@ -13,33 +17,83 @@ function createGrid(size = 16) {
                 div.classList.add('tile')
                 row.append(div)
             }
-        container.append(row)
+        grid.append(row)
     }
-    body.append(container);
-    hoverEventCreator();
+    game.append(grid);
+    pencil();
 };
 
+function createNewGrid(){
+    const size = document.querySelector('input').value
+    eraseAll();
+    const grid = document.getElementsByClassName('grid');
+    grid[0].remove();
+    createGrid(size)
+}
+
+function eraseAll(){
+    const tiles = document.querySelectorAll('.tile')
+    tiles.forEach(tile => tile.style.backgroundColor = 'rgb(233, 233, 233)')
+}
+
+//PENCIL FUNCTIONALITY---------------------------------------------------------------------------
+
+let isColored = false
+let pencilType = 'black' //agregar funcionalidad para color con esta variable
+
+function activateColor(){
+    isColored = true
+}
+
 function changeColor(){
-    this.classList.add('hovering')
+    if(isColored === true){
+        if(pencilType === 'black') colorBlack(this)
+        if(pencilType === 'rgb') colorRGB(this)
+        if(pencilType === 'eraser') erase(this)
+    }
+    else return
 }
 
-function resetGame(){
-    const size = window.prompt('How many tiles per row and column?', 16)
-    eraseTiles();
-    const container = document.getElementsByClassName('container');
-    container[0].remove();
-    createGrid(size);
+function stopColor(){
+    isColored = false
 }
 
-function eraseTiles(){
+function pencil(){
     const tiles = document.querySelectorAll('.tile')
-    tiles.forEach(tile => tile.classList.remove('hovering'))
+    tiles.forEach(tile => tile.addEventListener('mousedown', activateColor))
+    tiles.forEach(tile => tile.addEventListener('mousemove', changeColor))
+    tiles.forEach(tile => tile.addEventListener('mouseup', stopColor))
 }
 
-function hoverEventCreator(){
-    const tiles = document.querySelectorAll('.tile')
-    tiles.forEach(tile => tile.addEventListener('mouseover', changeColor))
+//PENCIL TYPES-----------------------------------------------------------------------
+
+function colorBlack(element){
+    element.classList.add('coloredBlack')
 }
 
-const resetButton = document.querySelector('.reset')
-resetButton.addEventListener('click', resetGame)
+function colorRGB(element) {
+    const r = Math.floor(Math.random() * 255) + 1
+    const g = Math.floor(Math.random() * 255) + 1
+    const b = Math.floor(Math.random() * 255) + 1
+    element.style.backgroundColor = `rgb(${r},${g},${b})`
+}
+
+function erase(element){
+    element.style.backgroundColor = 'rgb(233, 233, 233)';
+}
+
+//BUTTONS---------------------------------------------------------------------------------------------
+const clearButton = document.querySelector('.clear')
+clearButton.addEventListener('click', eraseAll)
+
+const blackPencilButton = document.querySelector('.black-pencil')
+blackPencilButton.addEventListener('click', () => pencilType = 'black')
+
+const rgbPencilButton = document.querySelector('.rgb-pencil')
+rgbPencilButton.addEventListener('click', () => pencilType = 'rgb')
+
+const eraserButton = document.querySelector('.eraser')
+eraserButton.addEventListener('click', () => pencilType = 'eraser')
+
+const createGridButton = document.querySelector('.grid-create')
+createGridButton.addEventListener('click', createNewGrid)

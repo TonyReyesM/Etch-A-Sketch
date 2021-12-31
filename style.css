@@ -1,4 +1,6 @@
 body {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: whitesmoke;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -8,46 +10,46 @@ body {
 }
 
 .title {
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    color: whitesmoke;
     margin: 0px;
+    padding: 15px;
+    padding-bottom: 5px;
 }
 
-.reset {
+.game {
+    display: flex;
+    column-gap: 20px;
+    align-items: center;
+}
+
+.clear {
     margin-bottom: 3px;
 }
 
-.container {
+.grid {
     display: flex;
-    flex: none;
+    flex: 0 0 auto;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    object-fit: contain;
-    max-height: 100vh;
-    max-width: 100%;
     border-style: solid;
     border-color: black;
     border-width: 5px;
     height: 560px;
-    width: auto;
+    width: 560px;
+    margin-right: 300px;
 }
 
 .row {
     display: flex;
-    height: 35px;
+    flex: 1 0 auto;
+    width: 560px;
 }
 
 .tile {
-    background-color: whitesmoke;
-    width: 35px;
-    height: auto;
-    border-style: dotted;
-    border-width: 1px;
-    border-color: black;
+    flex: 1;
+    background-color: rgb(233, 233, 233);
 }
 
-.hovering {
+.coloredBlack {
     background-color: black;
 }
-
