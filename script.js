@@ -68,7 +68,7 @@ function pencil(){
 //PENCIL TYPES-----------------------------------------------------------------------
 
 function colorBlack(element){
-    element.classList.add('coloredBlack')
+    element.style.background = 'black'
 }
 
 function colorRGB(element) {
@@ -83,17 +83,48 @@ function erase(element){
 }
 
 //BUTTONS---------------------------------------------------------------------------------------------
+function buttonChange(element) {
+    const pencilButtons = document.querySelectorAll('.pencil');
+    pencilButtons.forEach(button => button.classList.remove('selected'));
+    element.classList.add('selected');
+}
+
+function buttonClick(element) {
+    
+    element.classList.remove('selected');
+}
+
 const clearButton = document.querySelector('.clear')
-clearButton.addEventListener('click', eraseAll)
-
-const blackPencilButton = document.querySelector('.black-pencil')
-blackPencilButton.addEventListener('click', () => pencilType = 'black')
-
-const rgbPencilButton = document.querySelector('.rgb-pencil')
-rgbPencilButton.addEventListener('click', () => pencilType = 'rgb')
-
-const eraserButton = document.querySelector('.eraser')
-eraserButton.addEventListener('click', () => pencilType = 'eraser')
+//clearButton.addEventListener('click', eraseAll)
+clearButton.addEventListener('mousedown', () => clearButton.classList.add('selected'))
+clearButton.addEventListener('mouseup', () => {
+    eraseAll();
+    clearButton.classList.remove('selected')
+})
 
 const createGridButton = document.querySelector('.grid-create')
-createGridButton.addEventListener('click', createNewGrid)
+//createGridButton.addEventListener('click', createNewGrid)
+createGridButton.addEventListener('mousedown', () => createGridButton.classList.add('selected'))
+createGridButton.addEventListener('mouseup', () => {
+    createNewGrid();
+    createGridButton.classList.remove('selected');
+})
+
+const blackPencilButton = document.querySelector('.black-pencil')
+blackPencilButton.addEventListener('click', () => {
+    pencilType = 'black';
+    buttonChange(blackPencilButton)
+})
+
+const rgbPencilButton = document.querySelector('.rgb-pencil')
+rgbPencilButton.addEventListener('click', () => {
+    pencilType = 'rgb'   
+    buttonChange(rgbPencilButton)
+})
+
+const eraserButton = document.querySelector('.eraser')
+eraserButton.addEventListener('click', () => {
+    pencilType = 'eraser'    
+    buttonChange(eraserButton)
+})
+
