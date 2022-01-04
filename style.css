@@ -20,9 +20,13 @@ button {
 }
 
 .title {
-    margin: 0px;
-    padding: 15px;
-    padding-bottom: 5px;
+    border-width: 5px;
+    border-radius: 5px;
+    border-style: solid;
+    border-color: black;
+    margin: 3px;
+    padding: 3px;
+    background-color: rgba(0, 21, 41, 0.856);
 }
 
 .game {
